@@ -2,8 +2,17 @@ package ru.netology;
 
 import java.util.Map;
 
+/**
+ * Нарушенный принцип единственной ответственности, исправлен созданием
+ * класса Basket, который и будет отвечать за объект корзина(basket).
+ */
+
 public class Basket {
     protected Map<String, Integer> prices;
+    /**
+     * Исправлено нарушение правила Magic: неиспользовать числа напрямую в коде.
+     * Инициализация перенесена в конструктор:this.purchases=new Purchase[prices.size()]
+     */
     protected Purchase[] purchases;
 
     public Basket(Map<String, Integer> prices) {
@@ -30,7 +39,6 @@ public class Basket {
         for (int i = 0; i < purchases.length; i++) {
             Purchase purchase = purchases[i];
             if (purchase == null) continue;
-            System.out.println(purchase.title);
             System.out.println("\t" + purchase.title + " " + purchase.count + " шт. в сумме " + (purchase.count * prices.get(purchase.title)) + " руб.");
             sum += purchase.count * prices.get(purchase.title);
         }
